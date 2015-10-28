@@ -1,0 +1,15 @@
+# Sublime Packages
+
+* BracketHighlighter - [https://github.com/facelessuser/brackethighlighter](https://github.com/facelessuser/brackethighlighter)
+* DocBlockr - [https://github.com/spadgos/sublime-jsdocs](https://github.com/spadgos/sublime-jsdocs)
+* EditorConfig - [https://github.com/sindresorhus/editorconfig-sublime](https://github.com/sindresorhus/editorconfig-sublime)
+* Emmet - [http://emmet.io/](http://emmet.io/)
+* FileDiffs - [https://github.com/colinta/sublimefilediffs](https://github.com/colinta/sublimefilediffs)
+* JSHint Gutter - [https://github.com/victorporof/sublime-jshint](https://github.com/victorporof/sublime-jshint)
+* JSLint - [https://github.com/darrenderidder/sublime-jslint](https://github.com/darrenderidder/sublime-jslint)
+* Mercurial - [https://github.com/guillermooo/mercurial](https://github.com/guillermooo/mercurial)
+* Modific - [https://github.com/gornostal/modific](https://github.com/gornostal/modific)
+* Package Control - [http://packagecontrol.io](http://packagecontrol.io)
+* Phpcs - [https://github.com/benmatselby/sublime-phpcs](https://github.com/benmatselby/sublime-phpcs)
+* Sass - [https://github.com/nathos/sass-textmate-bundle](https://github.com/nathos/sass-textmate-bundle)
+* SimpleClone - [https://github.com/mikefowler/simple-clone](https://github.com/mikefowler/simple-clone)
