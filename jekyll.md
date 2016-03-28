@@ -1,0 +1,16 @@
+### Jekyll links
+
+* [https://github.com/mmistakes/minimal-mistakes](https://github.com/mmistakes/minimal-mistakes)
+* [https://github.com/poole/poole](https://github.com/poole/poole)
+* [https://mmistakes.github.io/hpstr-jekyll-theme/](https://mmistakes.github.io/hpstr-jekyll-theme/)
+[http://themeforest.net/item/astro-responsive-jekyll-theme/full_screen_preview/8586342](http://themeforest.net/item/astro-responsive-jekyll-theme/full_screen_preview/8586342)
+* [https://github.com/jeromelachaud/freelancer-theme](https://github.com/jeromelachaud/freelancer-theme)
+* [http://jekyllthemes.org/](http://jekyllthemes.org/)
+* [https://github.com/jekyll/jekyll/tree/master/site](https://github.com/jekyll/jekyll/tree/master/site)
+* [http://jekyllrb.com/docs/sites/](http://jekyllrb.com/docs/sites/)
+* [https://github.com/rsms/rsms.github.com](https://github.com/rsms/rsms.github.com)
+* [https://github.com/jekyll/jekyll/wiki/Sites](https://github.com/jekyll/jekyll/wiki/Sites)
+* [https://github.com/lucapette/lucapette.github.com](https://github.com/lucapette/lucapette.github.com)
+* [https://github.com/johnotander/pixyll](https://github.com/johnotander/pixyll)
+* [http://jekyll.tips/](http://jekyll.tips/)
+[http://maximeheckel.com/blog/2014/07/05/build-jekyll-blog-docker/](http://maximeheckel.com/blog/2014/07/05/build-jekyll-blog-docker/)
