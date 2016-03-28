@@ -1,0 +1,202 @@
+<html>
+<head>
+    <title>Weather API</title>
+
+    <meta charset="UTF-8">
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style type="text/css">
+        #title {
+            margin-top: 40px;
+        }
+
+        #icon{
+            margin: 20px 0 10px;
+        }
+
+        #temp {
+            margin-top: 20px;
+        }
+
+        #city {
+            margin-top: 40px;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h2 id="title">The weather outside your window</h2>
+
+            <div id="weather-data">
+                <div id="icon">
+                    <img src="http://openweathermap.org/img/w/01d.png" alt="current weather icon">
+                </div>
+
+                <div id="desc"></div>
+
+                <div id="temp" data-type="" data-celsius="" data-fahrenheit="" data-kelvin=""></div>
+                <button id="toggle" class="btn btn-default">Button</button>
+
+                <h4 id="city"></h4>
+                <h4 id="country"></h4>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            function getLatitudeAndLongitude () {
+                var location = {
+                    latitude: '',
+                    longitude: ''
+                };
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) { 
+                        location.latitude = position.coords.latitude;
+                        location.longitude = position.coords.longitude;
+                    });
+                }
+
+                return location;
+            }
+
+            function printErrorMsg () {
+                $('#weather-data').html('Something went wrong, no weather data can be presented here.. Sry..');
+            }
+
+            function temperatureObject () {
+                var kelvin = null;
+                var celsius = null;
+                var fahrenheit = null;
+
+                this.setTempByKelvin = function (newValue) {
+                    kelvin = newValue;
+                    updateValues('kelvin');
+                }
+
+                this.setTempByCelsius = function (newValue) {
+                    celsius = newValue;
+                    updateValues('celsius');
+                }
+
+                this.setTempByFahrenheit = function (newValue) {
+                    fahrenheit = newValue;
+                    updateValues('fahrenheit');
+                }
+
+                this.getTempInKelvin = function () {
+                    return kelvin;
+                }
+
+                this.getTempInCelsius = function () {
+                    return celsius;
+                }
+
+                this.getTempInFahrenheit = function () {
+                    return fahrenheit;
+                }
+
+                function updateValues (base) {
+                    /* http://www.metric-conversions.org/hu/homerseklet/ */
+
+                    var absolute = 273.15;
+
+                    if ('celsius' === base) {
+                        fahrenheit = (celsius * 1.8) + 32;
+                        kelvin = celsius + absolute;
+
+                    } else if ('fahrenheit' === base) {
+                        celsius = (fahrenheit - 32) / 1.8;
+                        kelvin = celsius + absolute;
+
+                    } else if ('kelvin' === base) {
+                        celsius = kelvin - absolute;
+                        fahrenheit = (celsius * 1.8) + 32;
+                    }
+
+                    if (null !== celsius) {
+                        kelvin = Math.round(kelvin * 10) / 10;
+                        celsius = Math.round(celsius * 10) / 10;
+                        fahrenheit = Math.round(fahrenheit * 10) / 10;
+                    }
+                }
+            }
+
+            $('#toggle').click(function () {
+                var $temp = $('#temp');
+                // var type = $temp.data('type');
+                var type = $temp.attr('data-type');
+                var postFix = '';
+                var btnText = '';
+
+                if ('fahrenheit' === type) {
+                    type = 'celsius';
+                    postFix = '°C';
+                    btnText = 'Show me in Fahrenheit';
+
+                } else {
+                    type = 'fahrenheit';
+                    postFix = '°F';
+                    btnText = 'Show me in Celsius';
+                }
+
+                $temp.attr('data-type', type);
+                $temp.html($temp.data(type) + ' ' + postFix);
+                $(this).html(btnText);
+            });
+
+            var coordinates = getLatitudeAndLongitude();
+            
+            // set some default values if position is not available
+            if ('' === coordinates.latitude || '' === coordinates.longitude) {
+                coordinates.latitude = 47;
+                coordinates.longitude = 19;
+            }
+
+            var lat = 'lat=' + coordinates.latitude;
+            var lon = 'lon=' + coordinates.longitude;
+            var key = 'appid=ef9ae24c880b930ba2f1a771d48db89c';
+            var apiUrl = 'http://api.openweathermap.org/data/2.5/weather?' + lat + '&' + lon + '&' + key;
+        
+            $.getJSON(apiUrl, function(data) {
+                if (data && data.cod !== '404') {
+                    /* 
+                        API docs
+                        http://openweathermap.org/weather-data
+                        http://openweathermap.org/weather-conditions 
+                    */
+
+                    // update city
+                    $('#city').html(data.name);
+
+                    // update country
+                    $('#country').html(data.sys.country);
+
+                    // update icon
+                    var newIconSrc = 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
+                    $('#icon img').attr('src', newIconSrc);
+
+                    // update description
+                    $('#desc').html(data.weather[0].main);
+
+                    // update temperature
+                    var temp = new temperatureObject();
+                    temp.setTempByKelvin(data.main.temp);
+                    $('#temp').attr('data-celsius', temp.getTempInCelsius());
+                    $('#temp').attr('data-fahrenheit', temp.getTempInFahrenheit());
+                    $('#temp').attr('data-kelvin', temp.getTempInKelvin());
+                    $('#toggle').trigger('click');
+
+                } else {
+                    printErrorMsg();
+                }    
+            });
+        });
+    </script>
+</body>
+</html>

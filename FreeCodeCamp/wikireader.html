@@ -1,0 +1,99 @@
+<html>
+<head>
+    <title>Wiki Reader</title>
+
+    <meta charset="UTF-8">
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style type="text/css">
+        #title {
+            margin: 50px 0 40px;
+        }
+
+        #search {
+            margin-bottom: 10px;
+        }
+
+        #result-list {
+            margin-top: 50px;
+            margin-bottom: 100px;
+            display: none;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2 text-center">
+            <h2 id="title">You are at the entrance of the knowledge.<br/>What do you do?</h2>
+
+            <input type="text" class="form-control" id="search" />
+            <button id="btn-search" class="btn btn-default">Perform a search in the knowledgebase</button>
+            <button id="btn-feeling-lucky" class="btn btn-default">Feeling lucky, gimme the first portion of the knowledge</button>
+        </div>
+
+        <div class="col-xs-8 col-xs-offset-2" id="result-list"></div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#btn-search').click(function () {
+                var phrase = $('#search').val() || '';
+
+                if ('' !== phrase && phrase.length) {
+                    phrase = encodeURI(phrase);
+
+                    $.get({
+                        url: 'http://en.wikipedia.org/w/api.php?format=json&action=query&generator=search&gsrnamespace=0&gsrlimit=10&prop=pageimages|extracts&pilimit=max&exintro&explaintext&exsentences=1&exlimit=max&gsrsearch=' + phrase,
+                        dataType: 'jsonp',
+                        type: 'GET',
+                        headers: {
+                            'Api-User-Agent': 'Example/1.0'
+                        },
+                        success: function(data) {
+                            if (
+                                'undefined' !== typeof (data) &&
+                                'undefined' !== typeof (data.query) &&
+                                'undefined' !== typeof (data.query.pages)
+                            ) {
+                                var duration = 600;
+                                var $result = $('#result-list');
+
+                                $result.hide(duration, function() {
+                                    $result.html('');
+
+                                    $.each(data.query.pages, function(pageId, pageData) {
+                                        var $title = $('<div/>');
+                                        $title.addClass('panel-heading');
+                                        $title.html('<a href="http://en.wikipedia.org/?curid=' + pageId + '" target="_blank">' + pageData.title + '</a>');
+
+                                        var $content = $('<div/>');
+                                        $content.addClass('panel-body');
+                                        $content.html(pageData.extract);
+
+                                        var $oneResult = $('<div/>');
+                                        $oneResult.addClass('panel');
+                                        $oneResult.addClass('panel-default');
+
+                                        $oneResult.append($title);
+                                        $oneResult.append($content);
+                                        $result.append($oneResult);
+                                    });
+
+                                    $result.show(duration);    
+                                });
+                            }                               
+                        }
+                    });
+                }                    
+            });
+
+            $('#btn-feeling-lucky').click(function () {
+                window.open('http://en.wikipedia.org/wiki/Special:Random');
+            });
+        });
+    </script>
+</body>
+</html>
