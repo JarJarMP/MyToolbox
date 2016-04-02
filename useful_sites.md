@@ -24,6 +24,7 @@
 * [CSS-Tricks](https://css-tricks.com/)
 
 ### JavaScript
+* [Mastering the Module Pattern](https://toddmotto.com/mastering-the-module-pattern/)
 * [7 Essential Node.js Interview Questions](https://www.toptal.com/nodejs/interview-questions)
 * [History of NodeJS](https://blog.risingstack.com/history-of-node-js/)
 * [Javascript Style Guide](https://github.com/airbnb/javascript)
