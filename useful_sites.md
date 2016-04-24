@@ -25,6 +25,8 @@
 
 ### JavaScript
 * [Mastering the Module Pattern](https://toddmotto.com/mastering-the-module-pattern/)
+* [4 JavaScript Design Patterns You Should Know](https://scotch.io/bar-talk/4-javascript-design-patterns-you-should-know)
+* [JavaScript Design Patterns (dofactory)](http://www.dofactory.com/javascript/design-patterns)
 * [7 Essential Node.js Interview Questions](https://www.toptal.com/nodejs/interview-questions)
 * [History of NodeJS](https://blog.risingstack.com/history-of-node-js/)
 * [Javascript Style Guide](https://github.com/airbnb/javascript)
