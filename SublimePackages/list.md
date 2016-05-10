@@ -8,7 +8,7 @@
 * JSHint Gutter - [https://github.com/victorporof/sublime-jshint](https://github.com/victorporof/sublime-jshint)
 * JSLint - [https://github.com/darrenderidder/sublime-jslint](https://github.com/darrenderidder/sublime-jslint)
 * Mercurial - [https://github.com/guillermooo/mercurial](https://github.com/guillermooo/mercurial)
-* Mercurial for Sublime - [https://packagecontrol.io/packages/Mercurial%20for%20Sublime](https://packagecontrol.io/packages/Mercurial%20for%20Sublime)
+* Mercurial for Sublime - [https://packagecontrol.io/packages/Mercurial for Sublime](https://packagecontrol.io/packages/Mercurial%20for%20Sublime)
 * Modific - [https://github.com/gornostal/modific](https://github.com/gornostal/modific)
 * Package Control - [http://packagecontrol.io](http://packagecontrol.io)
 * Phpcs - [https://github.com/benmatselby/sublime-phpcs](https://github.com/benmatselby/sublime-phpcs)
