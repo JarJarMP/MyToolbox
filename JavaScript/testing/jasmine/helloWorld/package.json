@@ -1,0 +1,14 @@
+{
+  "name": "helloworldjasmine",
+  "version": "1.0.0",
+  "description": "testing jasmine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Peter Maroti",
+  "license": "ISC",
+  "dependencies": {
+    "jasmine": "^2.5.3"
+  }
+}
